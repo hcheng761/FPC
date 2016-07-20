@@ -18,7 +18,7 @@ $('a['https://www.google.com/webhp?hl=en&sa=X&ved=0ahUKEwjD3dHktOnNAhUL0GMKHb4IA
 
 //alert("Changed something.");
 $('img').on('click', function() {
-alert("Now we here");
+//alert("Now we here");
 
 // Create the HTML for the message
 var msg = '<div class=\"header\"><a id=\"close\" href="#">close X</a></div>';
@@ -29,33 +29,44 @@ elNote.setAttribute('id', 'note');                // Add an id of note
 elNote.innerHTML = msg;                           // Add the message
 document.body.appendChild(elNote);                // Add it to the page
 
-// Construct the request
+var queryKeywords;
+var url;
+chrome.runtime.sendMessage({greeting: "get url from tab"}, function(response) {
+  console.log(response.keywords);
+  queryKeywords = response.keywords;
+  alert(queryKeywords);
+
+  // Construct the request
 // Replace MyAppID with your Production AppID
-var url = "http://svcs.ebay.com/services/search/FindingService/v1";
+    url = "http://svcs.ebay.com/services/search/FindingService/v1";
     url += "?OPERATION-NAME=findItemsByKeywords";
     url += "&SERVICE-VERSION=1.0.0";
     url += "&SECURITY-APPNAME=JasonNar-fpc-PRD-45a6394d9-fdc20cc4";
     url += "&GLOBAL-ID=EBAY-US";
     url += "&RESPONSE-DATA-FORMAT=JSON";
-    //url += "&callback=_cb_findItemsByKeywords";
     url += "&REST-PAYLOAD";
-    url += "&keywords=harry%20potter";
+    url += "&keywords=" + queryKeywords;
     url += "&paginationInput.entriesPerPage=3"
-
-chrome.runtime.sendMessage({greeting: url}, function(response) {
-  console.log(response.farewell);
-  //_cb_findItemsByKeywords(response.farewell);
-  //Submit the request
-  //s=document.createElement('script'); // create script element
-  //s.src= url;
-  //document.body.appendChild(s);
+    alert(url);
+    console.log(url);
+    chrome.runtime.sendMessage({greeting: "call api", myUrl: url}, function(response) {
+  	console.log(response.farewell);//log signifies successful response
+  
 });
+
+});
+
+
+
+
+//alert(url);
+
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
     console.log(sender.tab ?
                 "from a content script:" + sender.tab.url :
                 "from the extension");
-    if (request.greeting == "hello"){
+    if (request.greeting == "hello") {
 	alert("got html from extension");
 	alert(request.newhtml);
 	document.getElementById("contentfpc").innerHTML = request.newhtml.join("");

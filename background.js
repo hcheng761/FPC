@@ -11,22 +11,43 @@ chrome.runtime.onMessage.addListener(
                 "from a content script:" + sender.tab.url :
                 "from the extension");
     console.log(request.greeting);
-    if (request.greeting == "http://svcs.ebay.com/services/search/FindingService/v1?OPERATION-NAME=findItemsByKeywords&SERVICE-VERSION=1.0.0&SECURITY-APPNAME=JasonNar-fpc-PRD-45a6394d9-fdc20cc4&GLOBAL-ID=EBAY-US&RESPONSE-DATA-FORMAT=JSON&REST-PAYLOAD&keywords=harry%20potter&paginationInput.entriesPerPage=3") {
+    if (request.greeting == "call api") {
 	//Submit the request
 	var myResponse;
-  	$.get(request.greeting, function(data) {
+  	$.get(request.myUrl, function(data) {
 		alert("Data Loaded: " + data);
 		_cb_findItemsByKeywords(data)
 		myResponse = data;
 	}, "json" );
       sendResponse({farewell: "got it"});
+      return true;
 	//sendResponse({farewell: myResponse });
+    }
+    else if (request.greeting == "get url from tab") {
+	var rawUrl;
+	chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
+	    rawUrl = tabs[0].url;
+	    //parse the url
+	    alert(rawUrl);
+	    var startPattern = /[?q=]/i;//delimits the start of query
+	    var endPattern = /[&]/i;//delimits the end of query
+	    var indexStart = rawUrl.search(startPattern);//delimits the start of query
+	    var indexEnd = rawUrl.search(endPattern);//find end of searched query
+	    alert(indexStart);
+	    alert(indexEnd);
+	    alert(rawUrl);
+	    alert(rawUrl.substring(indexStart+3,indexEnd));
+	    sendResponse({keywords: rawUrl.substring(indexStart+3,indexEnd)});
+	    
+	});
+	
+	return true;//keeps the event listener channel open asynchronously
     }
  });
 
 // Parse the response and build an HTML table to display search results
 function _cb_findItemsByKeywords(root) {
-	alert("in call-back function!");
+	//alert("in call-back function!");
 	var items = root.findItemsByKeywordsResponse[0].searchResult[0].item || [];
 	var html = [];
 	html.push('<table width="100%" border="0" cellspacing="0" cellpadding="3"><tbody>');
@@ -47,3 +68,6 @@ function _cb_findItemsByKeywords(root) {
 	});
 	//document.getElementById("content").innerHTML = html.join("");
 }	// End _cb_findItemsByKeywords() function
+
+
+
