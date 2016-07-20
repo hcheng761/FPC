@@ -3,12 +3,20 @@
 					//http://i.imgur.com/Z9z75pr.png
 
 var localLogo = chrome.extension.getURL("logo.png");
+/*
+$('.pslmain').append("<img id = 'clickable'>");
+  $('#clickable').each(function(index, image)  {
+    $('#clickable').attr('src', localLogo);
+    $('#clickable').attr('width', '50px');
+    $('#clickable').attr('height', '43px');
+  });*/
 
 $('.pslmain').append("<img class = 'clickable'>");
-$('.clickable').attr('src', localLogo);
-$('.clickable').attr('width', '50px');
-$('.clickable').attr('width', '43px');
-
+  $('.clickable').each(function(index, image)  {
+    $('.clickable').attr('src', localLogo);
+    $('.clickable').attr('width', '50px');
+    $('.clickable').attr('height', '43px');
+});
 //alert("Changed something.");
 $('img').on('click', function() {
 //alert("Now we here");
