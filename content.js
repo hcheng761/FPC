@@ -4,17 +4,10 @@
 
 var localLogo = chrome.extension.getURL("logo.png");
 
-$('img').each(function(index,image) {
-        $(image).attr('src', localLogo);
-        $(image).attr('width', '60px');
-        $(image).attr('height', '52px');
-        $(image).attr('id', "clickable");
-    });
-/*
-$('a['https://www.google.com/webhp?hl=en&sa=X&ved=0ahUKEwjD3dHktOnNAhUL0GMKHb4IA3EQPAgD']').each(function(index,image)
-{
-	$(pic).attr('id', "clickable")
-});*/
+$('.pslmain').append("<img class = 'clickable'>");
+$('.clickable').attr('src', localLogo);
+$('.clickable').attr('width', '50px');
+$('.clickable').attr('width', '43px');
 
 //alert("Changed something.");
 $('img').on('click', function() {
