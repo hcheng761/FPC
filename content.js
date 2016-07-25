@@ -35,7 +35,7 @@ var url;
 chrome.runtime.sendMessage({greeting: "get url from tab"}, function(response) {
   console.log(response.keywords);
   queryKeywords = response.keywords;
-  alert(queryKeywords);
+  //alert(queryKeywords);
 
   // Construct the request
 // Replace MyAppID with your Production AppID
@@ -48,7 +48,7 @@ chrome.runtime.sendMessage({greeting: "get url from tab"}, function(response) {
     url += "&REST-PAYLOAD";
     url += "&keywords=" + queryKeywords;
     url += "&paginationInput.entriesPerPage=3"
-    alert(url);
+    //alert(url);
     console.log(url);
     chrome.runtime.sendMessage({greeting: "call api", myUrl: url}, function(response) {
   	console.log(response.farewell);//log signifies successful response
@@ -68,8 +68,8 @@ chrome.runtime.onMessage.addListener(
                 "from a content script:" + sender.tab.url :
                 "from the extension");
     if (request.greeting == "hello") {
-	alert("got html from extension");
-	alert(request.newhtml);
+	//alert("got html from extension");
+	//alert(request.newhtml);
 	document.getElementById("contentfpc").innerHTML = request.newhtml.join("");
       //sendResponse({farewell: "goodbye"});
 
