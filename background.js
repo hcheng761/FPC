@@ -14,8 +14,13 @@ chrome.runtime.onMessage.addListener(
     if (request.greeting == "call api") {
 	//Submit the request
 	var myResponse;
+	console.log(request.myUrl);
   	$.get(request.myUrl, function(data) {
+<<<<<<< HEAD
 		alert("Data Loaded: " + data);
+=======
+		//alert("Data Loaded: " + data);
+>>>>>>> af903ead9c5ca83a1658ed38b663c48b72bb821f
 		_cb_findItemsByKeywords(data);
 		myResponse = data;
 	}, "json" );
@@ -28,15 +33,15 @@ chrome.runtime.onMessage.addListener(
 	chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
 	    rawUrl = tabs[0].url;
 	    //parse the url
-	    alert(rawUrl);
+	    //alert(rawUrl);
 	    var startPattern = /[?q=]/i;//delimits the start of query
 	    var endPattern = /[&]/i;//delimits the end of query
 	    var indexStart = rawUrl.search(startPattern);//delimits the start of query
 	    var indexEnd = rawUrl.search(endPattern);//find end of searched query
-	    alert(indexStart);
-	    alert(indexEnd);
-	    alert(rawUrl);
-	    alert(rawUrl.substring(indexStart+3,indexEnd));
+	    //alert(indexStart);
+	    //alert(indexEnd);
+	    //alert(rawUrl);
+	    //alert(rawUrl.substring(indexStart+3,indexEnd));
 	    sendResponse({keywords: rawUrl.substring(indexStart+3,indexEnd)});
 	    
 	});
@@ -58,6 +63,7 @@ function _cb_findItemsByKeywords(root) {
 		var viewitem 	= item.viewItemURL;
 		var currentPrice= item.sellingStatus.currentPrice;
 		var buyNowPrice = item.listingInfo.buyItNowPrice;//if any
+		alert(item.sellingStatus.currentPrice);
 		if (null != title && null != viewitem) {
 			html.push('<tr><td>' + '<img src="' + pic + '" border="0">' + '</td>' +
 			'<td><a href="' + viewitem + '" target="_blank">' + title + '</a></td>'+
