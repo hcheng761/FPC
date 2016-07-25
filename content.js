@@ -11,12 +11,24 @@ $('.pslmain').append("<img id = 'clickable'>");
     $('#clickable').attr('height', '43px');
   });*/
 
-$('.r').append("<img class = 'clickable'>");
-  $('.clickable').each(function(index, image)  {
+if ($('.stt__selected-view-item').text() == 'Grid')
+{
+  $('._tyb shop__secondary').append("<img class = 'clickable'>");
+    $('.clickable').each(function(index, image)  {
     $('.clickable').attr('src', localLogo);
-    $('.clickable').attr('width', '50px');
-    $('.clickable').attr('height', '43px');
-});
+    $('.clickable').attr('width', '20px');
+    $('.clickable').attr('height', '17px');
+  });
+}
+else
+{ 
+  $('.r').append("<img class = 'clickable'>");
+    $('.clickable').each(function(index, image)  {
+    $('.clickable').attr('src', localLogo);
+    $('.clickable').attr('width', '35px');
+    $('.clickable').attr('height', '30px');
+  });
+} 
 //alert("Changed something.");
 $('img').on('click', function() {
 //alert("Now we here");
