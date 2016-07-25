@@ -1,4 +1,4 @@
-console.log("this works, at least")
+//console.log("this works, at least")
 //chrome.tabs.executeScript(null, { file: "jquery.js" }, function() {
 //    chrome.tabs.executeScript(null, { file: "content.js" });
 //});
@@ -16,7 +16,7 @@ chrome.runtime.onMessage.addListener(
 	var myResponse;
   	$.get(request.myUrl, function(data) {
 		alert("Data Loaded: " + data);
-		_cb_findItemsByKeywords(data)
+		_cb_findItemsByKeywords(data);
 		myResponse = data;
 	}, "json" );
       sendResponse({farewell: "got it"});
