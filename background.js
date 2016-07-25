@@ -56,9 +56,16 @@ function _cb_findItemsByKeywords(root) {
 		var title	= item.title;
 		var pic		= item.galleryURL;
 		var viewitem 	= item.viewItemURL;
+		var currentPrice= item.sellingStatus.currentPrice;
+		var buyNowPrice = item.listingInfo.buyItNowPrice;//if any
 		if (null != title && null != viewitem) {
 			html.push('<tr><td>' + '<img src="' + pic + '" border="0">' + '</td>' +
-			'<td><a href="' + viewitem + '" target="_blank">' + title + '</a></td></tr>');
+			'<td><a href="' + viewitem + '" target="_blank">' + title + '</a></td>'+
+			'<td>' + '<ul>' + 
+				'<li> Current Price: ' + currentPrice + '</li>' + 
+				'<li> Buy It Now (if any): ' + buyNowPrice + '</li>' + 
+				'</ul>' +
+			'</td></tr>');
 		}
 	}
 	
