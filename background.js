@@ -57,15 +57,23 @@ function _cb_findItemsByKeywords(root) {
 		var title	= item.title;
 		var pic		= item.galleryURL;
 		var viewitem 	= item.viewItemURL;
-		var currentPrice= item.sellingStatus[0].currentPrice[0]['__value__'];
-		var buyNowPrice = item.listingInfo.buyItNowPrice;//if any
-		alert("Current Price: " + currentPrice);
+		var currentPrice;
+		var currentCurrency;
+		if(item.listingInfo[0].buyItNowPrice) {//not all products are buy it now
+			currentCurrency = item.listingInfo[0].buyItNowPrice[0]['@currencyId'];
+			currentPrice= item.listingInfo[0].buyItNowPrice[0]['__value__'];
+		} else if(item.sellingStatus[0].currentPrice) {//most products have this selling options
+			currentCurrency = item.sellingStatus[0].currentPrice[0]['@currencyId'];
+			currentPrice= item.sellingStatus[0].currentPrice[0]['__value__'];	
+		}
+		
+		//var buyNowPrice = item.listingInfo.buyItNowPrice;//if any
+		
 		if (null != title && null != viewitem) {
 			html.push('<tr><td>' + '<img src="' + pic + '" border="0">' + '</td>' +
 			'<td><a href="' + viewitem + '" target="_blank">' + title + '</a></td>'+
 			'<td>' + '<ul>' + 
-				'<li> Current Price: ' + currentPrice + '</li>' + 
-				'<li> Buy It Now (if any): ' + buyNowPrice + '</li>' + 
+				'<li> Current Price: ' + currentCurrency + ' ' + currentPrice + '</li>' +  
 				'</ul>' +
 			'</td></tr>');
 		}
