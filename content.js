@@ -11,7 +11,7 @@ $('.pslmain').append("<img id = 'clickable'>");
     $('#clickable').attr('height', '43px');
   });*/
 
-$('.pslmain').append("<img class = 'clickable'>");
+$('.r').append("<img class = 'clickable'>");
   $('.clickable').each(function(index, image)  {
     $('.clickable').attr('src', localLogo);
     $('.clickable').attr('width', '50px');
