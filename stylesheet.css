@@ -1,0 +1,46 @@
+@import url(http://fonts.googleapis.com/css?family=Oswald);
+
+body {
+  font-family: 'Oswald', 'Futura', sans-serif;
+  margin: 0; 
+  padding: 0;}
+
+/* Click event example - note style */
+#note {
+  color: #d7666b;
+  opacity: 0.9;
+  box-shadow: -3px 3px 6px #000;
+  padding: 1em 1em 2em 1em;
+  height: 95%;
+  width: 95%;
+  position: absolute;
+  top: 1em;
+  left: 0;}
+
+#note .header + div {
+  position: relative;
+  text-align: center;
+  top: 1px;
+  color: #d7666b;
+  padding: 20px;
+  margin: 30px;
+  border: 1px solid #d7666b;}
+
+#note h2 {
+  padding-top: 20px;
+  padding-bottom: 20px;}
+
+#note a {
+  text-decoration: none;
+  color: #d7666b;}
+
+#note .header {
+  text-align: right;
+  border: none;
+  padding: 0 0 0 10px;}
+
+.shown {
+  visibility: visible;}
+
+.hidden {
+  visibility: hidden;}
