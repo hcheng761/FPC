@@ -16,11 +16,7 @@ chrome.runtime.onMessage.addListener(
 	var myResponse;
 	console.log(request.myUrl);
   	$.get(request.myUrl, function(data) {
-<<<<<<< HEAD
-		alert("Data Loaded: " + data);
-=======
 		//alert("Data Loaded: " + data);
->>>>>>> af903ead9c5ca83a1658ed38b663c48b72bb821f
 		_cb_findItemsByKeywords(data);
 		myResponse = data;
 	}, "json" );
@@ -61,9 +57,9 @@ function _cb_findItemsByKeywords(root) {
 		var title	= item.title;
 		var pic		= item.galleryURL;
 		var viewitem 	= item.viewItemURL;
-		var currentPrice= item.sellingStatus.currentPrice;
+		var currentPrice= item.sellingStatus[0].currentPrice[0]['__value__'];
 		var buyNowPrice = item.listingInfo.buyItNowPrice;//if any
-		alert(item.sellingStatus.currentPrice);
+		alert("Current Price: " + currentPrice);
 		if (null != title && null != viewitem) {
 			html.push('<tr><td>' + '<img src="' + pic + '" border="0">' + '</td>' +
 			'<td><a href="' + viewitem + '" target="_blank">' + title + '</a></td>'+
