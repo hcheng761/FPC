@@ -69,9 +69,6 @@ chrome.runtime.sendMessage({greeting: "get url from tab"}, function(response) {
 
 });
 
-
-
-
 //alert(url);
 
 chrome.runtime.onMessage.addListener(
