@@ -37,10 +37,13 @@ $('img').on('click', function() {
 var msg = '<div class=\"header\"><a id=\"close\" href="#">close X</a></div>';
 msg += '<div class=\"contentfpc\" id=\"contentfpc\"><h2>Information to be inquired.</h2></div>';
 
-var elNote = document.createElement('div');       // Create a new element
+var elNote = document.createElement('span');       // Create a new element
 elNote.setAttribute('id', 'note');                // Add an id of note
 elNote.innerHTML = msg;                           // Add the message
 document.body.appendChild(elNote);                // Add it to the page
+//var topOfPage = document.getElementById("stt__ps-st");//stt__pstt, stt__ps-st
+//document.body.insertBefore(elNote, topOfPage);
+document.getElementById("stt__ps-st").appendChild(elNote);
 
 var queryKeywords;
 var url;
@@ -89,7 +92,8 @@ chrome.runtime.onMessage.addListener(
 });
 
 function dismissNote() {                          // Declare function
-  document.body.removeChild(elNote);              // Remove the note
+  //document.body.removeChild(elNote);              // Remove the note
+  $("#note").remove();
 }
 
 var elClose = document.getElementById('close');   // Get the close button

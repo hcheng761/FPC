@@ -51,7 +51,7 @@ function _cb_findItemsByKeywords(root) {
 	//alert("in call-back function!");
 	var items = root.findItemsByKeywordsResponse[0].searchResult[0].item || [];
 	var html = [];
-	html.push('<table width="100%" border="0" cellspacing="0" cellpadding="3"><tbody>');
+	html.push('<table width="50%" border="0" cellspacing="0" cellpadding="1"><tbody>');
 	for (var i = 0; i < items.length; ++i) {
 		var item	= items[i];
 		var title	= item.title;
@@ -71,8 +71,8 @@ function _cb_findItemsByKeywords(root) {
 		
 		if (null != title && null != viewitem) {
 			html.push('<tr><td>' + '<img src="' + pic + '" border="0">' + '</td>' +
-			'<td><a href="' + viewitem + '" target="_blank">' + title + '</a></td>'+
-			'<td>' + '<ul>' + 
+			'<td><a href="' + viewitem + '" target="_blank">' + title + '</a>'/*'</td>'*/+
+			/*'<td>' +*/ '<ul style="list-style:none;">' + 
 				'<li> Current Price: ' + currentCurrency + ' ' + currentPrice + '</li>' +  
 				'</ul>' +
 			'</td></tr>');
