@@ -38,10 +38,8 @@ chrome.runtime.onMessage.addListener(
 	    //alert(indexEnd);
 	    //alert(rawUrl);
 	    //alert(rawUrl.substring(indexStart+3,indexEnd));
-	    sendResponse({keywords: rawUrl.substring(indexStart+3,indexEnd)});
-	    
+	    sendResponse({keywords: rawUrl.substring(indexStart+3,indexEnd)}); 
 	});
-	
 	return true;//keeps the event listener channel open asynchronously
     }
  });
@@ -51,7 +49,7 @@ function _cb_findItemsByKeywords(root) {
 	//alert("in call-back function!");
 	var items = root.findItemsByKeywordsResponse[0].searchResult[0].item || [];
 	var html = [];
-	html.push('<table width="100%" border="0" cellspacing="0" cellpadding="3"><tbody>');
+	html.push('<div class = "dropdown-items">');
 	for (var i = 0; i < items.length; ++i) {
 		var item	= items[i];
 		var title	= item.title;
@@ -70,16 +68,14 @@ function _cb_findItemsByKeywords(root) {
 		//var buyNowPrice = item.listingInfo.buyItNowPrice;//if any
 		
 		if (null != title && null != viewitem) {
-			html.push('<tr><td>' + '<img src="' + pic + '" border="0">' + '</td>' +
-			'<td><a href="' + viewitem + '" target="_blank">' + title + '</a></td>'+
-			'<td>' + '<ul>' + 
-				'<li> Current Price: ' + currentCurrency + ' ' + currentPrice + '</li>' +  
-				'</ul>' +
-			'</td></tr>');
+			html.push('<div>' + '<img src="' + pic + '" width = "100" height = "100" id = \'result\'>' +
+			'<a href="' + viewitem + '" target="_blank">' + title + '</a>' + 
+				'<p id = \'resultText\'> Current Price: ' + currentCurrency + ' ' + currentPrice + '</p>' +
+			'</div>');
 		}
 	}
 	
-	html.push('</tdbody></table>');
+	html.push('</div>');
 	chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
   		chrome.tabs.sendMessage(tabs[0].id, {greeting: "hello", newhtml: html});
 	});
