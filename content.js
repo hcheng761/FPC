@@ -1,17 +1,6 @@
-//console.log("this works, at least");
-//alert("YO!");		searchform > tsf-p > nosjv logocont
-					//http://i.imgur.com/Z9z75pr.png
-
 var localLogo = chrome.extension.getURL("logo.png");
-/*
-$('.pslmain').append("<img id = 'clickable'>");
-  $('#clickable').each(function(index, image)  {
-    $('#clickable').attr('src', localLogo);
-    $('#clickable').attr('width', '50px');
-    $('#clickable').attr('height', '43px');
-  });*/
 
-if ($('.stt__selected-view-item').text() == 'Grid')
+/*if ($('.stt__selected-view-item').text() == 'Grid')
 {
   $('._tyb shop__secondary').append("<img class = 'clickable'>");
     $('.clickable').each(function(index, image)  {
@@ -21,29 +10,17 @@ if ($('.stt__selected-view-item').text() == 'Grid')
   });
 }
 else
-{ 
-  $('.r').append("<img class = 'clickable'>");
-    $('.clickable').each(function(index, image)  {
-    $('.clickable').attr('src', localLogo);
-    $('.clickable').attr('width', '35px');
-    $('.clickable').attr('height', '30px');
-  });
-} 
-//alert("Changed something.");
-$('img').on('click', function() {
-//alert("Now we here");
+{*/ 
+
+//$('.clickable').click(logoClick());
 
 // Create the HTML for the message
-var msg = '<div class=\"header\"><a id=\"close\" href="#">close X</a></div>';
-msg += '<div class=\"contentfpc\" id=\"contentfpc\"><h2>Information to be inquired.</h2></div>';
 
-var elNote = document.createElement('span');       // Create a new element
-elNote.setAttribute('id', 'note');                // Add an id of note
-elNote.innerHTML = msg;                           // Add the message
-document.body.appendChild(elNote);                // Add it to the page
-//var topOfPage = document.getElementById("stt__ps-st");//stt__pstt, stt__ps-st
-//document.body.insertBefore(elNote, topOfPage);
-document.getElementById("stt__ps-st").appendChild(elNote);
+$('.r').append('<div class=\"contentfpc\" id=\"contentfpc\"></div>');
+$('.contentfpc').append("<img class = 'clickable'>");
+$('.clickable').attr('src', localLogo);
+$('.clickable').attr('width', '35px');
+$('.clickable').attr('height', '30px');
 
 var queryKeywords;
 var url;
@@ -108,30 +85,21 @@ buildURLArray(filterarray);
     console.log(url);
     chrome.runtime.sendMessage({greeting: "call api", myUrl: url}, function(response) {
   	console.log(response.farewell);//log signifies successful response
-  
+  });
 });
-
-});
-
-
-
-
-//alert(url);
 
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
     console.log(sender.tab ?
                 "from a content script:" + sender.tab.url :
                 "from the extension");
-    if (request.greeting == "hello") {
-	//alert("got html from extension");
-	//alert(request.newhtml);
-	document.getElementById("contentfpc").innerHTML = request.newhtml.join("");
-      //sendResponse({farewell: "goodbye"});
+    if (request.greeting == "hello")
+    	$(".contentfpc").append(request.newhtml.join(""));
+  });
 
-    }
-});
 
+
+/*
 function dismissNote() {                          // Declare function
   //document.body.removeChild(elNote);              // Remove the note
   $("#note").remove();
@@ -139,7 +107,8 @@ function dismissNote() {                          // Declare function
 
 var elClose = document.getElementById('close');   // Get the close button
 elClose.addEventListener('click', dismissNote, false);// Click close-clear note
-});
+*/
+//}
 
 // Get the url from the search on current tab
 //chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
@@ -148,7 +117,7 @@ elClose.addEventListener('click', dismissNote, false);// Click close-clear note
 //});
 
 
-
+/*
 // Parse the response and build an HTML table to display search results
 function _cb_findItemsByKeywords(root) {
 	console.log("in call-back function!");
@@ -176,3 +145,4 @@ function _cb_findItemsByKeywords(root) {
 	document.getElementById("content").innerHTML = html.join("");
 }	// End _cb_findItemsByKeywords() function
 
+*/
