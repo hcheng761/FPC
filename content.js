@@ -52,6 +52,46 @@ chrome.runtime.sendMessage({greeting: "get url from tab"}, function(response) {
   queryKeywords = response.keywords;
   //alert(queryKeywords);
 
+// Create a JavaScript array of the item filters you want to use in your request
+var filterarray = [
+  {"name":"FreeShippingOnly",
+   "value":"true",
+   "paramName":"",
+   "paramValue":""},
+  {"name":"ListingType",
+   "value":["AuctionWithBIN", "FixedPrice"],
+   "paramName":"",
+   "paramValue":""},
+  ];
+// Define global variable for the URL filter
+var urlfilter = "";
+// Generates an indexed URL snippet from the array of item filters
+function  buildURLArray() {
+  // Iterate through each filter in the array
+  for(var i=0; i<filterarray.length; i++) {
+    //Index each item filter in filterarray
+    var itemfilter = filterarray[i];
+    // Iterate through each parameter in each item filter
+    for(var index in itemfilter) {
+      // Check to see if the paramter has a value (some don't)
+      if (itemfilter[index] !== "") {
+        if (itemfilter[index] instanceof Array) {
+          for(var r=0; r<itemfilter[index].length; r++) {
+          var value = itemfilter[index][r];
+          urlfilter += "&itemFilter\(" + i + "\)." + index + "\(" + r + "\)=" + value ;
+          }
+        }
+        else {
+          urlfilter += "&itemFilter\(" + i + "\)." + index + "=" + itemfilter[index];
+        }
+      }
+    }
+  }
+}  // End buildURLArray() function
+
+// Execute the function to build the URL filter
+buildURLArray(filterarray);
+
   // Construct the request
 // Replace MyAppID with your Production AppID
     url = "http://svcs.ebay.com/services/search/FindingService/v1";
@@ -63,6 +103,7 @@ chrome.runtime.sendMessage({greeting: "get url from tab"}, function(response) {
     url += "&REST-PAYLOAD";
     url += "&keywords=" + queryKeywords;
     url += "&paginationInput.entriesPerPage=3"
+    url += urlfilter;
     //alert(url);
     console.log(url);
     chrome.runtime.sendMessage({greeting: "call api", myUrl: url}, function(response) {
