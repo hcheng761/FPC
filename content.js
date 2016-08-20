@@ -79,7 +79,7 @@ buildURLArray(filterarray);
     url += "&RESPONSE-DATA-FORMAT=JSON";
     url += "&REST-PAYLOAD";
     url += "&keywords=" + queryKeywords;
-    url += "&paginationInput.entriesPerPage=3"
+    url += "&paginationInput.entriesPerPage=5"
     url += urlfilter;
     //alert(url);
     console.log(url);
@@ -94,11 +94,21 @@ chrome.runtime.onMessage.addListener(
                 "from a content script:" + sender.tab.url :
                 "from the extension");
     if (request.greeting == "hello")
+    {
     	$(".contentfpc").append(request.newhtml.join(""));
+      wrapdiv();
+    }
   });
 
-
-
+var arr = [];
+function wrapdiv()  //saves the information into variables so items can be hidden
+{                   //dropdown option will delete divs but the info will be retained
+  for (i = 1; i < 6; i++)
+  {
+    var eq = $($('.dropdown-items').children()[i]).html();
+    arr.push(eq);
+  }
+}
 /*
 function dismissNote() {                          // Declare function
   //document.body.removeChild(elNote);              // Remove the note
