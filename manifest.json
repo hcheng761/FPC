@@ -14,7 +14,7 @@
     {
 	"matches": ["https://www.google.com/*"],
 	"js": ["jquery-1.11.0.js", "content.js"],
-  "css" : ["stylesheet.css"],
+  	"css": ["stylesheet.css", "winSheet.css"],
 	"run_at": "document_end"
     }
   ],

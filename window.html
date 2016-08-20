@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-	<link rel="stylesheet" href="stylesheet.css" />
+	<link rel="stylesheet" href="winSheet.css" />
 </head>
 <body>
 
@@ -13,9 +13,28 @@
 
 <a href="product.html"></a>
  	<div id="page">
-		<img src="logo.png" style="width:50px;">
+		
+	<span class="numItems">
+		Number of Displayed Items: 
+		<select id="numResults">
+			<option value="three">3</option>
+			<option value="four">4</option>
+			<option value="five">5</option>
+		</select>
+	</span>
+	<span class="miscOptions">
+		
+	</span>
 		
  	</div>
+		<div class="dropdown">
+		  <button onclick="myFunction()" class="dropbtn">Dropdown</button>
+		  <div id="myDropdown" class="dropdown-content">
+		    <a href="#">Option 1</a>
+		    <a href="#">Option 2</a>
+		    <a href="#">Option 3</a>
+		  </div>
+		</div>
  		<script src="jquery-1.11.0.js"></script>
  		<script src="background.js"></script>
 		<script src="content.js"></script>
