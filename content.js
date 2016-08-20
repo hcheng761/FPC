@@ -96,7 +96,7 @@ chrome.runtime.onMessage.addListener(
                 "from the extension");
     if (request.greeting == "hello")
     {
-    	$(".contentfpc").append(request.newhtml.join(""));
+    	$("#dropdown_container").html(request.newhtml.join(""));
       wrapdiv();
     }
   });
