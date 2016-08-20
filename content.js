@@ -18,6 +18,7 @@ else
 
 $('.ab_ctl').first().prepend('<div class=\"contentfpc\"></div>');
 $('.contentfpc').append("<img class = 'clickable'>");
+$('.contentfpc').append("<div id = 'dropdown_container'>");
 $('.clickable').attr('src', localLogo);
 $('.clickable').attr('width', '35px');
 $('.clickable').attr('height', '30px');
@@ -94,10 +95,14 @@ chrome.runtime.onMessage.addListener(
                 "from a content script:" + sender.tab.url :
                 "from the extension");
     if (request.greeting == "hello")
+<<<<<<< HEAD
     {
     	$(".contentfpc").append(request.newhtml.join(""));
       wrapdiv();
     }
+=======
+    	$("#dropdown_container").html(request.newhtml.join(""));
+>>>>>>> c18f9fc937013d75e5880609e59b832d17e7fab8
   });
 
 var arr = [];
