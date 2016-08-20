@@ -110,6 +110,8 @@ function wrapdiv()  //saves the information into variables so items can be hidde
     arr.push(eq);
   }
 }
+
+
 /*
 function dismissNote() {                          // Declare function
   //document.body.removeChild(elNote);              // Remove the note
