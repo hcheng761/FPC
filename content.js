@@ -16,7 +16,7 @@ else
 
 // Create the HTML for the message
 
-$('.r').append('<div class=\"contentfpc\" id=\"contentfpc\"></div>');
+$('.ab_ctl').first().prepend('<div class=\"contentfpc\"></div>');
 $('.contentfpc').append("<img class = 'clickable'>");
 $('.clickable').attr('src', localLogo);
 $('.clickable').attr('width', '35px');
